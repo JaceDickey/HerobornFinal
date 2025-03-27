@@ -14,9 +14,9 @@ public static class Utilities
         PlayerBehavior.sprintBoost = false;
         PlayerBehavior.sprintMax = 1000;
         PlayerBehavior.jumpCost = 200;
-        EnemyBehavior.RestartCollider();
         OpeningWallScript.destroyThis = false;
         GameBehavior.detected = "HIDDEN";
         GameBehavior.bullets = PlayerBehavior.bullets;
+        EnemyBehavior.restartCheck = true;
     }
 }

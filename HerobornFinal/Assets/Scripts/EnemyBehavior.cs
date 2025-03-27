@@ -4,7 +4,9 @@ using UnityEngine.AI;
 
 public class EnemyBehavior : MonoBehaviour
 {
-    private static SphereCollider sphereCollider;
+    private SphereCollider sphereCollider;
+    public static bool shrinkCheck = false;
+    public static bool restartCheck = false;
 
     public Transform patrolRoute;
     public List<Transform> locations;
@@ -93,8 +95,18 @@ public class EnemyBehavior : MonoBehaviour
         {
             MoveToNextPatrolLocation();
         }
+        if (restartCheck == true)
+        {
+            RestartCollider();
+            shrinkCheck = false;
+        }
+        if (shrinkCheck == true)
+        {
+            ShrinkCollider();
+            shrinkCheck = false;
+        }
     }
-    public static void ShrinkCollider()
+    public void ShrinkCollider()
     {
         if (sphereCollider != null)
         {
@@ -108,18 +120,18 @@ public class EnemyBehavior : MonoBehaviour
         }
     }
 
-    public static void RestartCollider()
+    public void RestartCollider()
     {
         if (sphereCollider != null)
         {
-            float currentRadius = sphereCollider.radius;
             sphereCollider.radius = 12f;
         }
         else
         {
-            Debug.LogError("SphereCollider component not found!");
+            Debug.LogWarning("No SphereCollider found on this object.");
         }
     }
+
     private void OnCollisionEnter(Collision collision)
     {
         if (collision.gameObject.name == "Bullet(Clone)")

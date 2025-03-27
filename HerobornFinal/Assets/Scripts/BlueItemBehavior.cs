@@ -14,7 +14,7 @@ public class BlueItemBehavior : MonoBehaviour
             Destroy(this.transform.parent.gameObject);
             Debug.Log("Enemy detection radius halved!");
 
-            EnemyBehavior.ShrinkCollider();
+            EnemyBehavior.shrinkCheck = true;
             PlayerBehavior.blueSneakyPickedUp();
         }
     }
